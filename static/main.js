@@ -1,5 +1,4 @@
-const msg = (text) =>
-    document.getElementById('msg').textContent=text||'';
+const msg = (text) => document.getElementById('msg').textContent=text||'';
 
 async function api(path,opts){
     try{

@@ -20,12 +20,7 @@ def _slim(product):
         "barcode": product.get("code") or product.get("_id", ""),
         "product_name": product.get("product_name", "Unknown"),
         "brands": product.get("brands", ""),
-        "ingredients_text": product.get("ingredients_text", ""),
-        "nutriscore": product.get("nutriscore_grade", ""),
-        "quantity": product.get("quantity", ""),
-        "categories": product.get("categories", ""),
     }
-
     return data
 
 def fetch_by_barcode(barcode):
@@ -48,7 +43,13 @@ def search_by_name(name, limit=2):
     
     data = _get(
         f"{BASE}/cgi/search.pl",
-        params={"search_terms": name, "search_simple": 1, "action": "process","json": 1, "page_size": limit},
+        params={
+            "search_terms": name,
+            "search_simple": 1, 
+            "action": "process",
+            "json": 1, 
+            "page_size": limit
+        },
     )
     products = [_slim(p) for p in data.get("products", [])]
     return products
